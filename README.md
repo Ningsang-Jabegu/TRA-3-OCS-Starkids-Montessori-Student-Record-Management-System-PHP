@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Project Logo" width="200" style="height:auto; borderRadius: 30%;">
+    <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Project Logo" width="250" style="height:auto; borderRadius: 30%;">
 </p>
 
 <h1 align="center">Student Record Management System - Starkids Montessori</h1>
