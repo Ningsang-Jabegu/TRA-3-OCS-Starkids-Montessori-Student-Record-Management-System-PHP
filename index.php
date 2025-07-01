@@ -37,7 +37,7 @@
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12  overflow-hidden">
                     <div class="mt-2 mb-4 clearfix">
                         <span class="dashboard-title pull-left">Student Records</span>
                         <a href="create.php" class="btn btn-success float-right shadow-sm">
@@ -82,6 +82,7 @@
                     $sql = "SELECT * FROM students";
                     if ($result = mysqli_query($link, $sql)) {
                         if (mysqli_num_rows($result) > 0) {
+                            echo '<div style="overflow-x:auto;">';
                             echo '<table class="table table-bordered table-striped">';
                             echo "<thead>";
                             echo "<tr>";
@@ -121,6 +122,7 @@
                             echo "</tr>";
                             echo "</tfoot>";
                             echo "</table>";
+                            echo '</div>';
                             mysqli_free_result($result);
                         } else {
                             echo '<div class="alert alert-info"><em>No student records found.</em></div>';
@@ -130,6 +132,7 @@
                     }
                     mysqli_close($link);
                     ?>
+                
                 </div>
             </div>
         </div>
@@ -138,55 +141,71 @@
         <hr>
         <p class="mb-1">&copy; 2024 - <?php echo date('Y'); ?> Starkids Montessori. All rights reserved.</p>
         <small>
-            Developed for Montessori School Management.<br>
+            Developed for Starkids Montessori Pre-School Management.<br>
             For support or queries, contact: <a href="mailto:info@starkids.edu.np">info@starkids.edu.np</a>
         </small>
     </footer>
 </body>
 <script>
     $(document).ready(function () {
-        $('#liveSearch').on('input', function () {
-            let query = $(this).val().trim();
+        let allStudents = [];
 
-            $.ajax({
-                url: 'search-students.php',
-                method: 'POST',
-                data: { search: query },
-                success: function (data) {
-                    const $tableBody = $('#studentTableBody');
-                    const $newRows = $('<tbody>' + data.trim() + '</tbody>').children().filter('tr');
-
-                    // Animate existing rows out
-                    $tableBody.children('tr').each(function () {
-                        const $row = $(this);
-                        $row.addClass('row-exit');
-                        $row[0].offsetHeight;
-                        $row.addClass('row-exit-active');
-
-                        $row.one('transitionend', function () {
-                            $row.remove();
-                        });
-                    });
-
-                    // Add new rows after short delay
-                    setTimeout(function () {
-                        $newRows.each(function () {
-                            const $newRow = $(this);
-                            $newRow.addClass('row-enter');
-                            $tableBody.append($newRow);
-                            $newRow[0].offsetHeight;
-                            $newRow.addClass('row-enter-active');
-
-                            $newRow.one('transitionend', function () {
-                                $newRow.removeClass('row-enter row-enter-active');
-                            });
-                        });
-                    }, 200);
-                }
-            });
+        // Fetch all data once
+        $.ajax({
+            url: 'search-students.php',
+            method: 'POST',
+            data: { search: '' },
+            success: function (data) {
+                allStudents = $('<tbody>' + data.trim() + '</tbody>').children('tr');
+                renderRows(allStudents);
+            }
         });
+
+        // On input, filter and re-render
+        $('#liveSearch').on('input', function () {
+            const query = $(this).val().toLowerCase().trim();
+
+            const filteredRows = allStudents.filter(function () {
+                const text = $(this).text().toLowerCase();
+                return text.includes(query);
+            });
+
+            renderRows(filteredRows);
+        });
+
+        // Renders rows with animation
+        function renderRows(rows) {
+            const $tableBody = $('#studentTableBody');
+            const oldRows = $tableBody.children('tr');
+
+            oldRows.each(function () {
+                const $row = $(this);
+                $row.addClass('row-exit');
+                $row[0].offsetHeight;
+                $row.addClass('row-exit-active');
+                $row.one('transitionend', function () {
+                    $row.remove();
+                });
+            });
+
+            setTimeout(() => {
+                rows.each(function () {
+                    const $newRow = $(this).clone(); // important to avoid detaching from original
+                    $newRow.addClass('row-enter');
+                    $tableBody.append($newRow);
+                    $newRow[0].offsetHeight;
+                    $newRow.addClass('row-enter-active');
+                    $newRow.one('transitionend', function () {
+                        $newRow.removeClass('row-enter row-enter-active');
+                    });
+                });
+            }, 200);
+        }
     });
 </script>
+
+
+
 
 
 

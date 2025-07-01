@@ -1,20 +1,8 @@
 <?php
 require_once "config.php";
 
-$search = $_POST['search'] ?? '';
-$search = trim($search);
-
-if ($search === '') {
-    $sql = "SELECT * FROM students";
-    $stmt = mysqli_query($link, $sql);
-} else {
-    $sql = "SELECT * FROM students WHERE student_name LIKE ? OR class LIKE ? OR roll_no LIKE ?";
-    $stmt = mysqli_prepare($link, $sql);
-    $param = "%{$search}%";
-    mysqli_stmt_bind_param($stmt, "sss", $param, $param, $param);
-    mysqli_stmt_execute($stmt);
-    $stmt = mysqli_stmt_get_result($stmt);
-}
+$sql = "SELECT * FROM students";
+$stmt = mysqli_query($link, $sql);
 
 while ($row = mysqli_fetch_assoc($stmt)) {
     echo "<tr>";
