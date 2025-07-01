@@ -188,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
     <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -211,6 +211,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         value="<?php echo $student_name; ?>">
                     <div class="invalid-feedback"><?php echo $errors["student_name"]; ?></div>
                 </div>
+                <div class="form-group">
+                    <label>Student Image <span class="text-danger">*</span></label>
+                    <input type="file" id="photo" name="student_image"
+                        class="form-control p-0 <?php echo (!empty($errors["student_image"])) ? 'is-invalid' : ''; ?>"
+                        accept="image/*" style="height: fit-content;">
+                    <div class="invalid-feedback"><?php echo $errors["student_image"] ?? ''; ?></div>
+                </div>
+                <script>
+                    document.getElementById('photo').addEventListener('change', function () {
+                        // const file = this.files[0];
+                        // if (file) {
+                        //     const reader = new FileReader();
+                        //     reader.onload = function (e) {
+                        //         // You can display the image preview here if needed
+                        //         console.log(e.target.result);
+                        //     };
+                        //     reader.readAsDataURL(file);
+                        // }
+                        if (this.files && this.files[0]) {
+                            let fileName = this.files[0].name;
+                            let lastDot = fileName.lastIndexOf('.');
+                            let name = fileName.substring(0, lastDot);
+                            let ext = fileName.substring(lastDot + 1);
+
+                            // Remove all special characters and symbols, replace with space, and trim
+                            let cleanName = name.replace(/[^a-zA-Z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+
+                            // Capitalize first letter of each word
+                            let capitalizedName = cleanName.replace(/\b\w/g, function (char) {
+                                return char.toUpperCase();
+                            });
+
+                            // If you want to capitalize only initials of student's name (assuming student's name is in cleanName)
+                            // let studentInitials = cleanName.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+                            console.log("Image Name: " + capitalizedName);
+                            console.log("Extension: " + ext);
+                        }
+                        // console.log("File Extension: " + this.files);
+                    });
+                </script>
                 <div class="form-group">
                     <label>Class <span class="text-danger">*</span></label>
                     <input type="text" name="class"

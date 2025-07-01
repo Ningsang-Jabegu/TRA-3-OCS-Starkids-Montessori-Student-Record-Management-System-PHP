@@ -41,17 +41,22 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="index.php">
             <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Starkids Montessori Logo"
                 style="width:180px;height:auto;vertical-align:middle;padding:4px;background: #fff; border-radius: 8px;">
             <span style="vertical-align:middle;">Starkids Montessori</span>
         </a>
-    </nav>
+    </nav> -->
+    <?php
+            // Set the active page for navbar highlighting
+            $activePage = 'students';
+            include 'component/navbar-desktop.php';
+        ?>
     <div class="wrapper">
         <div class="container-fluid">
             <h2 class="dashboard-title">View Student Record</h2>

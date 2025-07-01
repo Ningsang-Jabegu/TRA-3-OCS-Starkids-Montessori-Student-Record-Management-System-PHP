@@ -43,7 +43,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
     <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
