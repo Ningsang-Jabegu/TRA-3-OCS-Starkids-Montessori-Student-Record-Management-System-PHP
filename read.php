@@ -38,19 +38,22 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     <title>View Student | Starkids Montessori</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">
-            <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Starkids Montessori Logo" style="width:180px;height:auto;vertical-align:middle;padding:4px;background: #fff; border-radius: 8px;">
+        <a class="navbar-brand" href="index.php">
+            <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Starkids Montessori Logo"
+                style="width:180px;height:auto;vertical-align:middle;padding:4px;background: #fff; border-radius: 8px;">
             <span style="vertical-align:middle;">Starkids Montessori</span>
         </a>
     </nav>
-    <div class="container">
-        <div class="wrapper mx-auto">
+    <div class="wrapper">
+        <div class="container-fluid">
             <h2 class="dashboard-title">View Student Record</h2>
             <?php foreach ($row as $field => $value): ?>
                 <div class="form-group d-flex align-items-center mb-2">
