@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <title>Student Dashboard | Starkids Montessori</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Student Dashboard for Starkids Montessori - manage and view student records efficiently.">
+    <meta name="keywords" content="student, dashboard, starkids, montessori, management, records">
+    <meta name="author" content="Starkids Montessori">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#563d7c">
     <!-- Bootstrap 4.5.2 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome 4.7.0 -->

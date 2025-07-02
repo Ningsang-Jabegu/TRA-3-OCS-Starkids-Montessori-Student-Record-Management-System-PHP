@@ -6,57 +6,41 @@ if (!isset($activePage)) {
     $activePage = '';
 }
 
-function isActive($page, $activePage) {
-    return $page === $activePage ? 'active' : '';
-}
-?>
+include_once __DIR__ . '/../helpers/nav-helper.php';
 
-<nav class="navbar navbar-light">
+
+// Nav items has been moved to a separate file for better organization
+include_once 'resources/nav-item.php';
+?>
+<nav class="navbar navbar-desktop navbar-light">
     <div class="navbar-above">
-        <a class="navbar-click" href="#">
+        <a class="navbar-click" href="<?php echo ($activePage === 'dashboard') ? '#' : 'index.php'; ?>"></a>
             <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Starkids Montessori Logo">
             <span>Starkids Montessori</span>
         </a>
         <ul class="nav">
-            <li class="nav-item <?php echo isActive('dashboard', $activePage); ?>">
-                <a class="nav-link <?php echo isActive('dashboard', $activePage); ?>" href="index.php">
-                    <i class="fa icon-white fa-dashboard"></i> Dashboard
-                </a>
-            </li>
-            <li class="nav-item <?php echo isActive('students', $activePage); ?>">
-                <a class="nav-link <?php echo isActive('students', $activePage); ?>" href="students.php">
-                    <i class="fa icon-white fa-users"></i> Students
-                </a>
-            </li>
-            <li class="nav-item <?php echo isActive('classes', $activePage); ?>">
-                <a class="nav-link <?php echo isActive('classes', $activePage); ?>" href="classes.php">
-                    <i class="fa icon-white fa-building"></i> Classes
-                </a>
-            </li>
-            <li class="nav-item <?php echo isActive('attendance', $activePage); ?>">
-                <a class="nav-link <?php echo isActive('attendance', $activePage); ?>" href="attendance.php">
-                    <i class="fa icon-white fa-calendar-check-o"></i> Attendance
-                </a>
-            </li>
-            <li class="nav-item <?php echo isActive('reports', $activePage); ?>">
-                <a class="nav-link <?php echo isActive('reports', $activePage); ?>" href="reports.php">
-                    <i class="fa icon-white fa-bar-chart"></i> Reports
-                </a>
-            </li>
+            <?php foreach ($navItems as $item): ?>
+                <?php if ($item['section'] === 'above'): ?>
+                    <li class="nav-item <?php echo isActive($item['page'], $activePage); ?>">
+                        <a class="nav-link <?php echo isActive($item['page'], $activePage); ?>" href="<?php echo htmlspecialchars($item['href']); ?>">
+                            <i class="fa icon-white <?php echo htmlspecialchars($item['icon']); ?>"></i> <?php echo htmlspecialchars($item['name']); ?>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </ul>
     </div>
     <div class="navbar-below">
         <ul class="nav">
-            <li class="nav-item <?php echo isActive('settings', $activePage); ?>">
-                <a class="nav-link <?php echo isActive('settings', $activePage); ?>" href="settings.php">
-                    <i class="fa icon-white fa-cog"></i> Settings
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="logout.php">
-                    <i class="fa icon-white fa-sign-out"></i> Logout
-                </a>
-            </li>
+            <?php foreach ($navItems as $item): ?>
+                <?php if ($item['section'] === 'below'): ?>
+                    <li class="nav-item <?php echo isActive($item['page'], $activePage); ?>">
+                        <a class="nav-link <?php echo isActive($item['page'], $activePage); ?>" href="<?php echo htmlspecialchars($item['href']); ?>">
+                            <i class="fa icon-white <?php echo htmlspecialchars($item['icon']); ?>"></i> <?php echo htmlspecialchars($item['name']); ?>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </ul>
     </div>
 </nav>
