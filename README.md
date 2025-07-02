@@ -56,7 +56,7 @@
 1. **Clone the Repository**
 
     ```bash
-    git clone https://github.com/Ningsang-Jabegu/TRA-2-OCS-Starkids-Montessori-Student-Record-Management-System-PHP.git
+    git clone https://github.com/Ningsang-Jabegu/TRA-3-OCS-Starkids-Montessori-Student-Record-Management-System-PHP.git
     ```
 
 2. **Import the Database**
