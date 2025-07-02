@@ -10,35 +10,35 @@ $navItems = [
     [
         'name' => 'Admissions',
         'page' => 'admissions',
-        'href' => 'admissions.php',
+        'href' => '../pages/admissions.php',
         'icon' => 'fa-user-plus',
         'section' => 'above'
     ],
     [
         'name' => 'Students',
         'page' => 'students',
-        'href' => 'students.php',
+        'href' => '../pages/students.php',
         'icon' => 'fa-users',
         'section' => 'above'
     ],
     [
         'name' => 'Classes',
         'page' => 'classes',
-        'href' => 'classes.php',
+        'href' => '../pages/classes.php',
         'icon' => 'fa-building',
         'section' => 'above'
     ],
     [
         'name' => 'Attendance',
         'page' => 'attendance',
-        'href' => 'attendance.php',
+        'href' => '../pages/attendance.php',
         'icon' => 'fa-calendar-check-o',
         'section' => 'above'
     ],
     [
         'name' => 'Reports',
         'page' => 'reports',
-        'href' => 'reports.php',
+        'href' => '../pages/reports.php',
         'icon' => 'fa-bar-chart',
         'section' => 'above'
     ],
