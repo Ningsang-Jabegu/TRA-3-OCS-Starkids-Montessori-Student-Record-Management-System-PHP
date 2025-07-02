@@ -4,7 +4,7 @@
             <div class="col-md-12  overflow-hidden">
                 <div class="mt-2 mb-4 clearfix">
                     <span class="dashboard-title pull-left">Student Records</span>
-                    <a href="create.php" class="btn btn-success float-right shadow-sm">
+                    <a href="admissions.php" class="btn btn-success float-right shadow-sm">
                         <i class="fa fa-plus color-white"></i> Add New Student
                     </a>
                 </div>

@@ -112,8 +112,8 @@ body {
 }
 
 .navbar-mob-margin {
-    margin-top: .5rem!important;
-  }
+  margin-top: 0.5rem !important;
+}
 
 @media (max-width: 767.98px) {
   .navbar-desktop {
@@ -129,7 +129,7 @@ body {
   }
 
   .navbar-mob-margin {
-    margin-top: 1.5rem!important;
+    margin-top: 1.5rem !important;
   }
 
   .main-wrapper {
@@ -202,8 +202,21 @@ body {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   color: #1a2236;
-  font-size: 2rem;
   letter-spacing: 1px;
+}
+
+.dashboard-title,
+.admission-form-title {
+  font-size: 2rem;
+}
+
+.admission-form-subtitle {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #1a2236;
+  margin-bottom: 0;
+  margin-top: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .wrapper {
@@ -276,13 +289,71 @@ body {
   clear: both;
 }
 
+.form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.form-row .form-group {
+  flex: 1;
+  min-width: 200px;
+  /* border: 1px solid red; */
+}
+
+.form-student-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #e3e6ed;
+  margin: -70px 0 30px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  font-size: 0.9rem;
+  color: #1a2236;
+  border: 2px solid #1a22368f;
+  box-shadow: 0 4px 12px rgba(26, 34, 54, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+#student-photo-preview {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+#student-photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
 @media (max-width: 767.98px) {
   .wrapper {
     padding: 50px 5px 10px 5px;
   }
 
-  .dashboard-title {
+  .form-row {
+    flex-direction: column;
+  }
+  .form-row .form-group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .dashboard-title,
+  .admission-form-title {
     font-size: 1.3rem;
+  }
+  .form-student-photo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px auto;
   }
 }
 
@@ -291,12 +362,19 @@ body {
     font-size: 1.4rem;
   }
 
-  .dashboard-title {
+  .dashboard-title,
+  .admission-form-title {
     font-size: 1.2rem;
   }
 
   .wrapper {
-    padding: 15px;
+    padding: 65px 15px 10px 15px;
+  }
+
+  .form-student-photo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px auto;
   }
 }
 
