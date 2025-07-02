@@ -197,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <!-- <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="index.php">
             <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Starkids Montessori Logo"
                 style="width:180px;height:auto;vertical-align:middle;padding:4px;background: #fff; border-radius: 8px;">
@@ -476,12 +476,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </form>
         </div>
-    </div> -->
-
-    <?php
-    $activePage = 'admissions';
-    include 'layout/page-structure.php';
-    ?>
+    </div>
 </body>
 
 </html>

@@ -10,42 +10,42 @@ $navItems = [
     [
         'name' => 'Admissions',
         'page' => 'admissions',
-        'href' => '../pages/admissions.php',
+        'href' => './pages/admissions.php',
         'icon' => 'fa-user-plus',
         'section' => 'above'
     ],
     [
         'name' => 'Students',
         'page' => 'students',
-        'href' => '../pages/students.php',
+        'href' => './pages/students.php',
         'icon' => 'fa-users',
         'section' => 'above'
     ],
     [
         'name' => 'Classes',
         'page' => 'classes',
-        'href' => '../pages/classes.php',
+        'href' => './pages/classes.php',
         'icon' => 'fa-building',
         'section' => 'above'
     ],
     [
         'name' => 'Attendance',
         'page' => 'attendance',
-        'href' => '../pages/attendance.php',
+        'href' => './pages/attendance.php',
         'icon' => 'fa-calendar-check-o',
         'section' => 'above'
     ],
     [
         'name' => 'Reports',
         'page' => 'reports',
-        'href' => '../pages/reports.php',
+        'href' => './pages/reports.php',
         'icon' => 'fa-bar-chart',
         'section' => 'above'
     ],
     [
         'name' => 'Settings',
         'page' => 'settings',
-        'href' => 'settings.php',
+        'href' => './pages/settings.php',
         'icon' => 'fa-cog',
         'section' => 'below'
     ],

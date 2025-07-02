@@ -1,8 +1,8 @@
-<div class="wrapper ">
+<div class="wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12  overflow-hidden">
-                <div class=" mb-4 clearfix navbar-mob-margin">
+                <div class="mt-2 mb-4 clearfix">
                     <span class="dashboard-title pull-left">Student Records</span>
                     <a href="create.php" class="btn btn-success float-right shadow-sm">
                         <i class="fa fa-plus color-white"></i> Add New Student
@@ -24,7 +24,7 @@
                     <?php endif; ?>
                 </form>
                 <?php
-                require_once "config.php";
+                require_once "db/config.php";
                 $search = '';
                 if (isset($_GET['search']) && $_GET['search'] !== '') {
                     $search = trim($_GET['search']);

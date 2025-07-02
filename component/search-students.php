@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "db/config.php";
 
 $sql = "SELECT * FROM students";
 $stmt = mysqli_query($link, $sql);
