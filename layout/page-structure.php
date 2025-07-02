@@ -7,7 +7,13 @@
 
     <div class="content-wrapper">
         <main class="main">
-            <?php include 'component/student-record.php'; ?>
+            <?php
+            if (isset($activePage) && $activePage === 'admissions') {
+                include 'component/admission-form.php';
+            } else {
+                include 'component/student-record.php';
+            }
+            ?>
         </main>
         <?php include 'component/footer.php'; ?>
     </div>

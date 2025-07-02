@@ -10,7 +10,7 @@ $navItems = [
     [
         'name' => 'Admissions',
         'page' => 'admissions',
-        'href' => './pages/admissions.php',
+        'href' => 'admissions.php',
         'icon' => 'fa-user-plus',
         'section' => 'above'
     ],

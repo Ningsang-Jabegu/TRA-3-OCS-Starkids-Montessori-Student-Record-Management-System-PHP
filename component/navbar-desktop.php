@@ -14,7 +14,7 @@ include_once 'resources/nav-item.php';
 ?>
 <nav class="navbar navbar-desktop navbar-light">
     <div class="navbar-above">
-        <a class="navbar-click" href="<?php echo ($activePage === 'dashboard') ? '#' : 'index.php'; ?>"></a>
+        <a class="navbar-click" href="#">
             <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Starkids Montessori Logo">
             <span>Starkids Montessori</span>
         </a>
@@ -22,8 +22,10 @@ include_once 'resources/nav-item.php';
             <?php foreach ($navItems as $item): ?>
                 <?php if ($item['section'] === 'above'): ?>
                     <li class="nav-item <?php echo isActive($item['page'], $activePage); ?>">
-                        <a class="nav-link <?php echo isActive($item['page'], $activePage); ?>" href="<?php echo htmlspecialchars($item['href']); ?>">
-                            <i class="fa icon-white <?php echo htmlspecialchars($item['icon']); ?>"></i> <?php echo htmlspecialchars($item['name']); ?>
+                        <a class="nav-link <?php echo isActive($item['page'], $activePage); ?>"
+                            href="<?php echo htmlspecialchars($item['href']); ?>">
+                            <i class="fa icon-white <?php echo htmlspecialchars($item['icon']); ?>"></i>
+                            <?php echo htmlspecialchars($item['name']); ?>
                         </a>
                     </li>
                 <?php endif; ?>
@@ -35,8 +37,10 @@ include_once 'resources/nav-item.php';
             <?php foreach ($navItems as $item): ?>
                 <?php if ($item['section'] === 'below'): ?>
                     <li class="nav-item <?php echo isActive($item['page'], $activePage); ?>">
-                        <a class="nav-link <?php echo isActive($item['page'], $activePage); ?>" href="<?php echo htmlspecialchars($item['href']); ?>">
-                            <i class="fa icon-white <?php echo htmlspecialchars($item['icon']); ?>"></i> <?php echo htmlspecialchars($item['name']); ?>
+                        <a class="nav-link <?php echo isActive($item['page'], $activePage); ?>"
+                            href="<?php echo htmlspecialchars($item['href']); ?>">
+                            <i class="fa icon-white <?php echo htmlspecialchars($item['icon']); ?>"></i>
+                            <?php echo htmlspecialchars($item['name']); ?>
                         </a>
                     </li>
                 <?php endif; ?>
