@@ -17,6 +17,10 @@
                     include_once './component/partials/form-fields/father-info.php';
                     include_once './component/partials/form-fields/mother-info.php';
                     include_once './component/partials/form-fields/guardian-info.php';
+                    include_once './component/partials/form-fields/suggestions-info.php';
+                    include_once './component/partials/form-fields/file-uploads.php';
+                    include_once './component/partials/form-fields/declearation-info.php';
+                    
                     ?>
                     <div class="form-group d-flex justify-content-between">
                         <input type="submit" class="btn btn-success px-4" value="Submit">
