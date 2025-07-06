@@ -24,8 +24,6 @@ include './component/partials/form-subtitle.php';
             value="<?php echo $father_last_name ?? ''; ?>">
         <div class="invalid-feedback"><?php echo $errors["father_last_name"] ?? ''; ?></div>
     </div>
-</div>
-<div class="form-row">
     <div class="form-group">
         <label>Occupation <span class="text-danger">*</span></label>
         <input type="text" name="father_occupation"
@@ -35,47 +33,24 @@ include './component/partials/form-subtitle.php';
     </div>
     <div class="form-group">
         <label>Office Name</label>
-        <input type="text" name="father_office_name"
-            class="form-control <?php echo (!empty($errors["father_office_name"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $father_office_name ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["father_office_name"] ?? ''; ?></div>
+        <input type="text" name="father_office"
+            class="form-control <?php echo (!empty($errors["father_office"])) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $father_office ?? ''; ?>">
+        <div class="invalid-feedback"><?php echo $errors["father_office"] ?? ''; ?></div>
     </div>
     <div class="form-group">
-        <label>Office Number</label>
-        <input type="text" name="father_office_number"
-            class="form-control <?php echo (!empty($errors["father_office_number"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $father_office_number ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["father_office_number"] ?? ''; ?></div>
+        <label>Contact Number <span class="text-danger">*</span></label>
+        <input type="text" name="father_contact"
+            class="form-control <?php echo (!empty($errors["father_contact"])) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $father_contact ?? ''; ?>">
+        <div class="invalid-feedback"><?php echo $errors["father_contact"] ?? ''; ?></div>
     </div>
+
 </div>
 
 <div class="form-row">
-    <h4 class="admission-form-detail-title">Contact</h4>
     <div class="form-group">
-        <label>Residence</label>
-        <input type="text" name="father_residence"
-            class="form-control <?php echo (!empty($errors["father_residence"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $father_residence ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["father_residence"] ?? ''; ?></div>
-    </div>
-    <div class="form-group">
-        <label>Mobile 1 <span class="text-danger">*</span></label>
-        <input type="text" name="father_mobile_1"
-            class="form-control <?php echo (!empty($errors["father_mobile_1"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $father_mobile_1 ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["father_mobile_1"] ?? ''; ?></div>
-    </div>
-    <div class="form-group">
-        <label>Mobile 2</label>
-        <input type="text" name="father_mobile_2"
-            class="form-control <?php echo (!empty($errors["father_mobile_2"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $father_mobile_2 ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["father_mobile_2"] ?? ''; ?></div>
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group">
-        <label>Email ID</label>
+        <label>Email</label>
         <input type="email" name="father_email"
             class="form-control <?php echo (!empty($errors["father_email"])) ? 'is-invalid' : ''; ?>"
             value="<?php echo $father_email ?? ''; ?>">

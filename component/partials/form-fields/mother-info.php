@@ -25,9 +25,6 @@ include './component/partials/form-subtitle.php';
             value="<?php echo $mother_last_name ?? ''; ?>">
         <div class="invalid-feedback"><?php echo $errors["mother_last_name"] ?? ''; ?></div>
     </div>
-</div>
-
-<div class="form-row">
     <div class="form-group">
         <label>Occupation <span class="text-danger">*</span></label>
         <input type="text" name="mother_occupation"
@@ -43,42 +40,17 @@ include './component/partials/form-subtitle.php';
         <div class="invalid-feedback"><?php echo $errors["mother_office"] ?? ''; ?></div>
     </div>
     <div class="form-group">
-        <label>Office No</label>
-        <input type="text" name="mother_office_no"
-            class="form-control <?php echo (!empty($errors["mother_office_no"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $mother_office_no ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["mother_office_no"] ?? ''; ?></div>
-    </div>
-</div>
-
-<div class="form-row">
-    <h4 class="admission-form-detail-title">Contact</h4>
-    <div class="form-group">
-        <label>Residence</label>
-        <input type="text" name="mother_residence"
-            class="form-control <?php echo (!empty($errors["mother_residence"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $mother_residence ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["mother_residence"] ?? ''; ?></div>
-    </div>
-    <div class="form-group">
-        <label>Mobile 1 <span class="text-danger">*</span></label>
-        <input type="text" name="mother_mobile_1"
-            class="form-control <?php echo (!empty($errors["mother_mobile_1"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $mother_mobile_1 ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["mother_mobile_1"] ?? ''; ?></div>
-    </div>
-    <div class="form-group">
-        <label>Mobile 2</label>
-        <input type="text" name="mother_mobile_2"
-            class="form-control <?php echo (!empty($errors["mother_mobile_2"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $mother_mobile_2 ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["mother_mobile_2"] ?? ''; ?></div>
+        <label>Contact Number <span class="text-danger">*</span></label>
+        <input type="text" name="mother_contact"
+            class="form-control <?php echo (!empty($errors["mother_contact"])) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $mother_contact ?? ''; ?>">
+        <div class="invalid-feedback"><?php echo $errors["mother_contact"] ?? ''; ?></div>
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group">
-        <label>Email ID</label>
+        <label>Email</label>
         <input type="email" name="mother_email"
             class="form-control <?php echo (!empty($errors["mother_email"])) ? 'is-invalid' : ''; ?>"
             value="<?php echo $mother_email ?? ''; ?>">

@@ -303,14 +303,46 @@ body {
   clear: both;
 }
 
-.form-row {
+.form-row,
+.form-row-last {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: self-start;
   gap: 20px;
+  width: 100%;
 }
-.form-row .form-group {
+
+.form-row-last {
+  width: 0;
+}
+
+.form-row-row {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  align-items: self-start;
+  gap: 20px;
+  /* margin-bottom: 20px; */
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: self-start;
+  width: 100%;
+  flex-wrap: wrap;
+  /* border: 1px solid red; */
+}
+
+.form-column .form-group {
+  width: 100%;
+}
+
+.form-row .form-group,
+.form-row-last .form-group,
+.form-column .form-group {
   flex: 1;
   min-width: 200px;
   /* border: 1px solid red; */
@@ -321,7 +353,7 @@ body {
   height: 150px;
   border-radius: 50%;
   background: #e3e6ed;
-  margin: -70px 0 30px auto;
+  /* margin: -70px 0 30px auto; */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -333,6 +365,8 @@ body {
   border: 2px solid #1a22368f;
   box-shadow: 0 4px 12px rgba(26, 34, 54, 0.1);
   position: relative;
+  margin: 0 auto 30px auto;
+  cursor: pointer;
   overflow: hidden;
 }
 
@@ -352,21 +386,20 @@ body {
     padding: 50px 5px 10px 5px;
   }
 
-  .form-row {
-    flex-direction: column;
+  .form-row-row {
+    justify-content: center;
+    flex-wrap: wrap;
   }
-  .form-row .form-group {
+
+  .form-row .form-group,
+  .form-row-row .form-row .form-group,
+  .form-row-last .form-group {
     width: 100%;
     margin-bottom: 15px;
   }
   .dashboard-title,
   .admission-form-title {
     font-size: 1.3rem;
-  }
-  .form-student-photo {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 30px auto;
   }
   .admission-form-detail-title {
     font-size: 1.1rem;
@@ -387,11 +420,6 @@ body {
     padding: 65px 15px 10px 15px;
   }
 
-  .form-student-photo {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 20px auto;
-  }
   .admission-form-detail-title {
     font-size: 1rem;
   }

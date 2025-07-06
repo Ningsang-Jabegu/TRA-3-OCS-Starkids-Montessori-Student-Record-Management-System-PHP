@@ -1,177 +1,300 @@
 <?php
-// Include config file
 require_once "db/config.php";
 
-// Define variables and initialize with empty values
-$student_name = $class = $roll_no = $gender = $dob = $contact_number = "";
-$errors = ["student_name" => "", "class" => "", "roll_no" => "", "gender" => "", "dob" => "", "contact_number" => ""];
+$errors = [];
+$student_id = null;
 
-// Handle form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate each field
-    $student_name = trim($_POST["student_name"]);
-    $class = trim($_POST["class"]);
-    $roll_no = trim($_POST["roll_no"]);
-    $gender = trim($_POST["gender"]);
-    $dob = trim($_POST["dob"]);
-    $contact_number = trim($_POST["contact_number"]);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $required_fields = [
+        'first_name',
+        'last_name',
+        'roll_no',
+        'class',
+        'gender',
+        'dob',
+        'contact_number',
+        'nationality',
+        'religion',
+        'blood_group',
+        'permanent_place',
+        'permanent_district',
+        'permanent_zone',
+        'temporary_district',
+        'temporary_zone'
+    ];
+
+    foreach ($required_fields as $field) {
+        if (empty(trim($_POST[$field] ?? ''))) {
+            $errors[$field] = "$field is required.";
+        }
+    }
+
+    if (count($errors) > 0) {
+        echo json_encode(['status' => 'error', 'errors' => $errors]);
+        exit;
+    }
+
+    $first_name = trim($_POST["first_name"] ?? '');
+    $middle_name = trim($_POST["middle_name"] ?? '');
+    $last_name = trim($_POST["last_name"] ?? '');
+    // $student_name = ucwords(trim("$first_name $middle_name $last_name"));
+
+    $roll_no = trim($_POST["roll_no"] ?? '');
+    $class = trim($_POST["class"] ?? '');
+    $gender = trim($_POST["gender"] ?? '');
+    $dob = trim($_POST["dob"] ?? '');
+    $contact_number = trim($_POST["contact_number"] ?? '');
     $nationality = trim($_POST["nationality"] ?? '');
     $religion = trim($_POST["religion"] ?? '');
     $blood_group = trim($_POST["blood_group"] ?? '');
+
     $permanent_place = trim($_POST["permanent_place"] ?? '');
     $permanent_district = trim($_POST["permanent_district"] ?? '');
     $permanent_zone = trim($_POST["permanent_zone"] ?? '');
     $temporary_place = trim($_POST["temporary_place"] ?? '');
     $temporary_district = trim($_POST["temporary_district"] ?? '');
     $temporary_zone = trim($_POST["temporary_zone"] ?? '');
-    $father_name = trim($_POST["father_name"] ?? '');
-    $father_occupation = trim($_POST["father_occupation"] ?? '');
-    $father_office = trim($_POST["father_office"] ?? '');
-    $father_contact = trim($_POST["father_contact"] ?? '');
-    $father_email = trim($_POST["father_email"] ?? '');
-    $mother_name = trim($_POST["mother_name"] ?? '');
-    $mother_occupation = trim($_POST["mother_occupation"] ?? '');
-    $mother_office = trim($_POST["mother_office"] ?? '');
-    $mother_contact = trim($_POST["mother_contact"] ?? '');
-    $mother_email = trim($_POST["mother_email"] ?? '');
-    $guardian_name = trim($_POST["guardian_name"] ?? '');
-    $guardian_relation = trim($_POST["guardian_relation"] ?? '');
-    $guardian_occupation = trim($_POST["guardian_occupation"] ?? '');
-    $guardian_office = trim($_POST["guardian_office"] ?? '');
-    $guardian_contact = trim($_POST["guardian_contact"] ?? '');
-    $guardian_email = trim($_POST["guardian_email"] ?? '');
 
-    if (empty($student_name))
-        $errors["student_name"] = "Enter student name.";
-    if (empty($class))
-        $errors["class"] = "Enter class.";
-    if (empty($roll_no))
-        $errors["roll_no"] = "Enter roll number.";
-    if (empty($gender))
-        $errors["gender"] = "Select gender.";
-    if (empty($dob))
-        $errors["dob"] = "Enter date of birth.";
-    if (empty($contact_number))
-        $errors["contact_number"] = "Enter contact number.";
-    if (empty($nationality))
-        $errors["nationality"] = "Enter nationality.";
-    if (empty($religion))
-        $errors["religion"] = "Enter religion.";
-    if (empty($blood_group))
-        $errors["blood_group"] = "Enter blood group.";
-    if (empty($permanent_place))
-        $errors["permanent_place"] = "Enter permanent place.";
-    if (empty($permanent_district))
-        $errors["permanent_district"] = "Enter permanent district.";
-    if (empty($permanent_zone))
-        $errors["permanent_zone"] = "Enter permanent zone.";
-    if (empty($temporary_place))
-        $errors["temporary_place"] = "Enter temporary place.";
-    if (empty($temporary_district))
-        $errors["temporary_district"] = "Enter temporary district.";
-    if (empty($temporary_zone))
-        $errors["temporary_zone"] = "Enter temporary zone.";
-    if (empty($father_name))
-        $errors["father_name"] = "Enter father's name.";
-    if (empty($father_occupation))
-        $errors["father_occupation"] = "Enter father's occupation.";
-    if (empty($father_contact))
-        $errors["father_contact"] = "Enter father's contact.";
-    if (empty($mother_name))
-        $errors["mother_name"] = "Enter mother's name.";
-    if (empty($mother_occupation))
-        $errors["mother_occupation"] = "Enter mother's occupation.";
-    if (empty($mother_contact))
-        $errors["mother_contact"] = "Enter mother's contact.";
+    $created_at = $_POST['declaration_date'] ?? date("Y-m-d");
+    $updated_at = date("Y-m-d H:i:s");
 
-    $has_error = array_filter($errors);
+    // Assign POST values to variables before passing to bind_param
+    $recommendation_factors = $_POST['recommendation_factors'] ?? '';
+    $child_reaction = $_POST['child_reaction'] ?? '';
+    $emergency_hospital = $_POST['emergency_hospital'] ?? '';
+    $positive_attitude = $_POST['positive_attitude'] ?? '';
+    $negative_attitude = $_POST['negative_attitude'] ?? '';
+    $interested = $_POST['interested'] ?? '';
+    $not_interested = $_POST['not_interested'] ?? '';
+    $health_status = $_POST['health_status'] ?? '';
+    $student_progress_report = $_POST['progress_report'] ?? '';
+    $student_birth_certificate = $_POST['birth_certificate'] ?? '';
+    $student_medical_report = $_POST['medical_report'] ?? '';
+    $declaration_date = $_POST['declaration_date'] ?? '';
+    $father_signature = $_POST['father_signature'] ?? '';
+    $mother_signature = $_POST['mother_signature'] ?? '';
 
-    if (!$has_error) {
-        $check_sql = "SELECT id FROM students WHERE class = ? AND roll_no = ?";
-        if ($check_stmt = mysqli_prepare($link, $check_sql)) {
-            mysqli_stmt_bind_param($check_stmt, "ss", $class, $roll_no);
-            mysqli_stmt_execute($check_stmt);
-            mysqli_stmt_store_result($check_stmt);
+    // Get the last inserted student ID for use in related tables
+    // Generate a unique student_id (e.g., "STU" + timestamp + random 4 digits)
+    // Generate a unique student_id using roll_no, class, and dob (format: STU{roll_no}{class}{dob})
+    // Example: STU1234A20240610 (if roll_no=1234, class=A, dob=2024-06-10)
+    // Recommended VARCHAR length for student_id in DB: at least 20 characters
+    $student_id = 'STU' . $roll_no . $class . str_replace('-', '', $dob);
 
-            if (mysqli_stmt_num_rows($check_stmt) > 0) {
-                echo "<script>alert('A student with the same class and roll number already exists.'); window.history.back();</script>";
-                mysqli_stmt_close($check_stmt);
-                exit();
-            }
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $generated_roll_no = $_POST["roll_no"] ?? $generated_roll_no;
 
-            mysqli_stmt_close($check_stmt);
-        }
+        $full_name = ucwords(trim("$first_name $middle_name $last_name"));
+        $student_name = $full_name;
+        // $roll_no = $generated_roll_no;
 
+        $student_image = uploadStudentFile(
+            'student_image',
+            $student_name,
+            $roll_no,
+            'Photo',
+            './web/student_images/'
+        );
 
-        $sql = "INSERT INTO students (
-            student_name, class, roll_no, gender, dob, contact_number,
-            nationality, religion, blood_group,
-            permanent_place, permanent_district, permanent_zone,
-            temporary_place, temporary_district, temporary_zone,
-            father_name, father_occupation, father_office, father_contact, father_email,
-            mother_name, mother_occupation, mother_office, mother_contact, mother_email,
-            guardian_name, guardian_relation, guardian_occupation, guardian_office, guardian_contact, guardian_email
-        ) VALUES (
-            ?, ?, ?, ?, ?, ?,
-            ?, ?, ?,
-            ?, ?, ?,
-            ?, ?, ?,
-            ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?, ?
-        )";
+        $student_birth_certificate = uploadStudentFile(
+            'birth_certificate',
+            $student_name,
+            $roll_no,
+            'Birth Certificate',
+            './web/student_birth_certificate/'
+        );
 
-        $check_sql = "SELECT id FROM students WHERE student_name = ? AND class = ? AND roll_no = ?";
+        $student_medical_report = uploadStudentFile(
+            'medical_record',
+            $student_name,
+            $roll_no,
+            'Medical Report',
+            './web/student_medical_report/'
+        );
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
-            mysqli_stmt_bind_param(
-                $stmt,
-                "sssssssssssssssssssssssssssssss",
-                $student_name,
-                $class,
-                $roll_no,
-                $gender,
-                $dob,
-                $contact_number,
-                $nationality,
-                $religion,
-                $blood_group,
-                $permanent_place,
-                $permanent_district,
-                $permanent_zone,
-                $temporary_place,
-                $temporary_district,
-                $temporary_zone,
-                $father_name,
-                $father_occupation,
-                $father_office,
-                $father_contact,
-                $father_email,
-                $mother_name,
-                $mother_occupation,
-                $mother_office,
-                $mother_contact,
-                $mother_email,
-                $guardian_name,
-                $guardian_relation,
-                $guardian_occupation,
-                $guardian_office,
-                $guardian_contact,
-                $guardian_email
-            );
-            if (mysqli_stmt_execute($stmt)) {
-                header("location: index.php");
-                exit();
-            } else {
-                echo "Something went wrong. Try again later.";
-            }
-            mysqli_stmt_close($stmt);
-        }
+        $student_progress_report = uploadStudentFile(
+            'progress_report',
+            $student_name,
+            $roll_no,
+            'Progress Report',
+            './web/student_progress_report/'
+        );
+
+        // Continue to insert into DB or handle success message
+        // You can pass the $student_image etc. to your insert logic here
     }
 
-    mysqli_close($link);
+    $insert_student_sql = "INSERT INTO students (
+        star_id, roll_no, class, gender, dob, nationality, religion, blood_group,
+        contact_number, student_image, permanent_place, permanent_district, permanent_zone,
+        temporary_place, temporary_district, temporary_zone, recommendation_factors, child_reaction, emergency_hospital,
+        positive_attitude, negative_attitude interested, not_interested, health_status, student_progress_report,
+        student_birth_certificate, student_medical_report, declaration_date, father_signature, mother_signature,
+         status, created_at, updated_at, first_name, middle_name, last_name
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+        ?, NULLIF(?,''), NULLIF(?,''), NULLIF(?,''), 
+        NULLIF(?,''), NULLIF(?,''), NULLIF(?,''), NULLIF(?,''), NULLIF(?,''), 
+        NULLIF(?,''), NULLIF(?,''), NULLIF(?,''), ?, ?, ?, 'pending', ?, ?, ?, ?, ?)";
+
+
+
+    $stmt = mysqli_prepare($link, $insert_student_sql);
+    mysqli_stmt_bind_param(
+        $stmt,
+        "sssssssssssssssssssssssssssssssssssssss",
+        $star_id,
+        $roll_no,
+        $class,
+        $gender,
+        $dob,
+        $nationality,
+        $religion,
+        $blood_group,
+        $contact_number,
+        $student_image,
+        $permanent_place,
+        $permanent_district,
+        $permanent_zone,
+        $temporary_place,
+        $temporary_district,
+        $temporary_zone,
+        $recommendation_factors,
+        $child_reaction,
+        $emergency_hospital,
+        $positive_attitude,
+        $interested,
+        $not_interested,
+        $health_status,
+        $student_progress_report,
+        $student_birth_certificate,
+        $student_medical_report,
+        $declaration_date,
+        $father_signature,
+        $mother_signature,
+        $created_at,
+        $updated_at,
+        $first_name,
+        $middle_name,
+        $last_name
+    );
+
+    if (mysqli_stmt_execute($stmt)) {
+        // Get the last inserted student ID for use in related tables
+        $student_id = mysqli_insert_id($link);
+
+        // You can now use $student_id to link records in parents, guardians, or other tables.
+
+        // Prepare and insert father's data
+        $father_first_name = trim($_POST['father_first_name'] ?? '');
+        $father_middle_name = trim($_POST['father_middle_name'] ?? '');
+        $father_last_name = trim($_POST['father_last_name'] ?? '');
+        $father_occupation = trim($_POST['father_occupation'] ?? '');
+        $father_office = trim($_POST['father_office'] ?? '');
+        $father_office_contact = trim($_POST['father_office_contact'] ?? '');
+        $father_residence = trim($_POST['father_residence'] ?? '');
+        $father_mobile1 = trim($_POST['father_mobile1'] ?? '');
+        $father_mobile2 = trim($_POST['father_mobile2'] ?? '');
+        $father_email = trim($_POST['father_email'] ?? '');
+        $father_facebook = trim($_POST['father_facebook'] ?? '');
+
+        $stmt_father = mysqli_prepare($link, "INSERT INTO parents (star_id, student_id, type, first_name, middle_name, last_name, occupation, office_name, office_number, residence, mobile_1, mobile_2, email, facebook_id) VALUES (?, 'father', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param(
+            $stmt_father,
+            "sisssssssssss",
+            $star_id,
+            $student_id,
+            $father_first_name,
+            $father_middle_name,
+            $father_last_name,
+            $father_occupation,
+            $father_office,
+            $father_office_contact,
+            $father_residence,
+            $father_mobile1,
+            $father_mobile2,
+            $father_email,
+            $father_facebook
+        );
+        mysqli_stmt_execute($stmt_father);
+
+        // Prepare and insert mother's data
+        $mother_first_name = trim($_POST['mother_first_name'] ?? '');
+        $mother_middle_name = trim($_POST['mother_middle_name'] ?? '');
+        $mother_last_name = trim($_POST['mother_last_name'] ?? '');
+        $mother_occupation = trim($_POST['mother_occupation'] ?? '');
+        $mother_office = trim($_POST['mother_office'] ?? '');
+        $mother_office_contact = trim($_POST['mother_office_contact'] ?? '');
+        $mother_residence = trim($_POST['mother_residence'] ?? '');
+        $mother_mobile1 = trim($_POST['mother_mobile1'] ?? '');
+        $mother_mobile2 = trim($_POST['mother_mobile2'] ?? '');
+        $mother_email = trim($_POST['mother_email'] ?? '');
+        $mother_facebook = trim($_POST['mother_facebook'] ?? '');
+
+        $stmt_mother = mysqli_prepare($link, "INSERT INTO parents (star_id, student_id, type, first_name, middle_name, last_name, occupation, office_name, office_number, residence, mobile_1, mobile_2, email, facebook_id) VALUES (?, 'mother', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param(
+            $stmt_mother,
+            "sisssssssssss",
+            $star_id,
+            $student_id,
+            $mother_first_name,
+            $mother_middle_name,
+            $mother_last_name,
+            $mother_occupation,
+            $mother_office,
+            $mother_office_contact,
+            $mother_residence,
+            $mother_mobile1,
+            $mother_mobile2,
+            $mother_email,
+            $mother_facebook
+        );
+        mysqli_stmt_execute($stmt_mother);
+
+        // Prepare and insert guardian's data
+        $guardian_first_name = trim($_POST['guardian_first_name'] ?? '');
+        $guardian_middle_name = trim($_POST['guardian_middle_name'] ?? '');
+        $guardian_last_name = trim($_POST['guardian_last_name'] ?? '');
+        $guardian_relation = trim($_POST['guardian_relation'] ?? '');
+        $guardian_occupation = trim($_POST['guardian_occupation'] ?? '');
+        $guardian_residence = trim($_POST['guardian_residence'] ?? '');
+        $guardian_mobile1 = trim($_POST['guardian_mobile1'] ?? '');
+        $guardian_mobile2 = trim($_POST['guardian_mobile2'] ?? '');
+        $guardian_email = trim($_POST['guardian_email'] ?? '');
+        $guardian_facebook = trim($_POST['guardian_facebook'] ?? '');
+
+        $stmt_guardian = mysqli_prepare(
+            $link,
+            "INSERT INTO guardians (star_id, student_id, type, first_name, middle_name, last_name, relation, occupation, residence, mobile1, mobile2, email, facebook) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+        $guardian_type = 'guardian';
+        mysqli_stmt_bind_param(
+            $stmt_guardian,
+            "sisssssssssss",
+            $star_id,
+            $student_id,
+            $guardian_type,
+            $guardian_first_name,
+            $guardian_middle_name,
+            $guardian_last_name,
+            $guardian_relation,
+            $guardian_occupation,
+            $guardian_residence,
+            $guardian_mobile1,
+            $guardian_mobile2,
+            $guardian_email,
+            $guardian_facebook
+        );
+        mysqli_stmt_execute($stmt_guardian);
+
+        echo json_encode(['status' => 'success', 'message' => 'Student added successfully.']);
+        exit;
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Failed to insert student.']);
+        exit;
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -180,7 +303,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Admission Form | Starkids Montessori</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Admission form for Starkids Montessori Preschool. Fill out the form to add a new student record.">
+    <meta name="description"
+        content="Admission form for Starkids Montessori Preschool. Fill out the form to add a new student record.">
     <meta name="keywords" content="admission, form, student, preschool, Starkids Montessori, registration">
     <meta name="author" content="Starkids Montessori">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -225,6 +349,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </nav>
      -->
     <?php
+
     include 'pages/admission-page.php';
     ?>
 </body>

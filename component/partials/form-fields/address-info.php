@@ -5,7 +5,7 @@ include './component/partials/form-subtitle.php';
 
 <div class="form-row">
     <div class="form-group">
-        <label> Permanent Place / Locality <span class="text-danger">*</span></label>
+        <label>Permanent Place / Locality <span class="text-danger">*</span></label>
         <input type="text" name="permanent_place"
             class="form-control <?php echo (!empty($errors["permanent_place"])) ? 'is-invalid' : ''; ?>"
             value="<?php echo $permanent_place ?? ''; ?>">
@@ -41,20 +41,17 @@ include './component/partials/form-subtitle.php';
         </select>
         <div class="invalid-feedback"><?php echo $errors["permanent_zone"] ?? ''; ?></div>
     </div>
-</div>
-
-<div class="form-row">
     <div class="form-group">
         <label>Temporary Place / Locality <span class="text-danger">*</span></label>
         <input type="text" name="temporary_place"
             class="form-control <?php echo (!empty($errors["temporary_place"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $permanent_place ?? ''; ?>">
+            value="<?php echo $temporary_place ?? ''; ?>">
         <div class="invalid-feedback"><?php echo $errors["temporary_place"] ?? ''; ?></div>
     </div>
     <div class="form-group">
         <label>Temporary District <span class="text-danger">*</span></label>
         <?php
-        $selectedDistrict = $permanent_district ?? 'Kathmandu';
+        $selectedDistrict = $temporary_district ?? 'Kathmandu';
         ?>
         <select name="temporary_district" class="form-control <?php echo (!empty($errors["temporary_district"])) ? 'is-invalid' : ''; ?>">
             <?php foreach ($nepalDistricts as $district): ?>
@@ -69,7 +66,7 @@ include './component/partials/form-subtitle.php';
         <label>Temporary Zone <span class="text-danger">*</span></label>
         <?php
         include_once './component/resources/nepal-zone.php';
-        $selectedZone = $permanent_zone ?? 'Central';
+        $selectedZone = $temporary_zone ?? 'Central';
         ?>
         <select name="temporary_zone" class="form-control <?php echo (!empty($errors["temporary_zone"])) ? 'is-invalid' : ''; ?>">
             <?php foreach ($nepalZones as $zone): ?>
@@ -80,4 +77,8 @@ include './component/partials/form-subtitle.php';
         </select>
         <div class="invalid-feedback"><?php echo $errors["temporary_zone"] ?? ''; ?></div>
     </div>
+</div>
+
+<div class="form-row">
+    
 </div>

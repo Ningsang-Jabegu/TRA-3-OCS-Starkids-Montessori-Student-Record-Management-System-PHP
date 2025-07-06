@@ -5,7 +5,7 @@ include './component/partials/form-subtitle.php';
 
 <div class="form-row">
     <div class="form-group">
-        <label>First Name<span class="text-danger">*</span></label>
+        <label>First Name <span class="text-danger">*</span></label>
         <input type="text" name="guardian_first_name"
             class="form-control <?php echo (!empty($errors["guardian_first_name"])) ? 'is-invalid' : ''; ?>"
             value="<?php echo $guardian_first_name ?? ''; ?>">
@@ -19,17 +19,14 @@ include './component/partials/form-subtitle.php';
         <div class="invalid-feedback"><?php echo $errors["guardian_middle_name"] ?? ''; ?></div>
     </div>
     <div class="form-group">
-        <label>Last Name<span class="text-danger">*</span></label>
+        <label>Last Name <span class="text-danger">*</span></label>
         <input type="text" name="guardian_last_name"
             class="form-control <?php echo (!empty($errors["guardian_last_name"])) ? 'is-invalid' : ''; ?>"
             value="<?php echo $guardian_last_name ?? ''; ?>">
         <div class="invalid-feedback"><?php echo $errors["guardian_last_name"] ?? ''; ?></div>
     </div>
-</div>
-
-<div class="form-row">
     <div class="form-group">
-        <label>Relation<span class="text-danger">*</span></label>
+        <label>Relation <span class="text-danger">*</span></label>
         <?php include './component/resources/guardian-relation.php'; ?>
         <select name="guardian_relation"
             class="form-control <?php echo (!empty($errors["guardian_relation"])) ? 'is-invalid' : ''; ?>">
@@ -44,42 +41,28 @@ include './component/partials/form-subtitle.php';
         <div class="invalid-feedback"><?php echo $errors["guardian_relation"] ?? ''; ?></div>
     </div>
     <div class="form-group">
-        <label>Occupation<span class="text-danger">*</span></label>
+        <label>Occupation <span class="text-danger">*</span></label>
         <input type="text" name="guardian_occupation"
             class="form-control <?php echo (!empty($errors["guardian_occupation"])) ? 'is-invalid' : ''; ?>"
             value="<?php echo $guardian_occupation ?? ''; ?>">
         <div class="invalid-feedback"><?php echo $errors["guardian_occupation"] ?? ''; ?></div>
     </div>
-</div>
-
-<div class="form-row">
-    <h4 class="admission-form-detail-title">Contact</h4>
     <div class="form-group">
-        <label>Residence</label>
-        <input type="text" name="guardian_residence"
-            class="form-control <?php echo (!empty($errors["guardian_residence"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $guardian_residence ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["guardian_residence"] ?? ''; ?></div>
+        <label>Office Name</label>
+        <input type="text" name="guardian_office"
+            class="form-control <?php echo (!empty($errors["guardian_office"])) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $guardian_office ?? ''; ?>">
+        <div class="invalid-feedback"><?php echo $errors["guardian_office"] ?? ''; ?></div>
     </div>
     <div class="form-group">
-        <label>Mobile 1<span class="text-danger">*</span></label>
-        <input type="text" name="guardian_mobile1"
-            class="form-control <?php echo (!empty($errors["guardian_mobile1"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $guardian_mobile1 ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["guardian_mobile1"] ?? ''; ?></div>
+        <label>Contact Number <span class="text-danger">*</span></label>
+        <input type="text" name="guardian_contact"
+            class="form-control <?php echo (!empty($errors["guardian_contact"])) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $guardian_contact ?? ''; ?>">
+        <div class="invalid-feedback"><?php echo $errors["guardian_contact"] ?? ''; ?></div>
     </div>
     <div class="form-group">
-        <label>Mobile 2</label>
-        <input type="text" name="guardian_mobile2"
-            class="form-control <?php echo (!empty($errors["guardian_mobile2"])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $guardian_mobile2 ?? ''; ?>">
-        <div class="invalid-feedback"><?php echo $errors["guardian_mobile2"] ?? ''; ?></div>
-    </div>
-</div>
-
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label>Email ID</label>
+        <label>Email</label>
         <input type="email" name="guardian_email"
             class="form-control <?php echo (!empty($errors["guardian_email"])) ? 'is-invalid' : ''; ?>"
             value="<?php echo $guardian_email ?? ''; ?>">
@@ -92,4 +75,8 @@ include './component/partials/form-subtitle.php';
             value="<?php echo $guardian_facebook ?? ''; ?>">
         <div class="invalid-feedback"><?php echo $errors["guardian_facebook"] ?? ''; ?></div>
     </div>
+</div>
+
+<div class="form-row">
+    
 </div>
