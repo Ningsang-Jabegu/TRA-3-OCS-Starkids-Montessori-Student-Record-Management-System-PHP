@@ -30,8 +30,54 @@
 <!-- Replace the below section with your screenshots -->
 **Screenshots:**
 
-- _Screenshots will be added soon to showcase the application's features._
+<!-- - _Screenshots will be added soon to showcase the application's features._ -->
 
+<p align="center">
+    <img src="./assets/images/screenshot-of-index-page.png" alt="Screenshot of dashboard/index.php" width="80%" style="border-radius: 12px;">
+    <br>
+    <em>Screenshot of dashboard/index.php (data fetched from the database shown below)</em>
+</p>
+
+<p align="center">
+    <img src="./assets/images/screenshot-of-admission-page.png" alt="Screenshot of admission.php" width="80%" style="border-radius: 12px;">
+    <br>
+    <em>Screenshot of admission.php (student admission form page)</em>
+</p>
+<p align="center">
+    <img src="./assets/images/screenshot-of-xaamp-control-panel.png" alt="Screenshot of XAMPP Control Panel" width="80%" style="border-radius: 12px;">
+    <br>
+    <em>Screenshot of XAMPP Control Panel showing the version used for running the application</em>
+</p>
+
+<p align="center">
+    <img src="./assets/images/screenshot-of-students-table-fields-in-mysql-db.png" alt="Screenshot of students table fields in MySQL database" width="80%" style="border-radius: 12px;">
+    <br>
+    <em>Screenshot of the <code>students</code> table fields in the MySQL database (shows all columns used for storing student records)</em>
+</p>
+
+<p align="center">
+    <img src="./assets/images/screenshot-of-fathers-table-fields-in-mysql-db.png" alt="Screenshot of fathers table fields in MySQL database" width="80%" style="border-radius: 12px;">
+    <br>
+    <em>Screenshot of the <code>fathers</code> table fields in the MySQL database (shows all columns used for storing father details related to students)</em>
+</p>
+
+<p align="center">
+    <img src="./assets/images/screenshot-of-mothers-table-fields-in-mysql-db.png" alt="Screenshot of mothers table fields in MySQL database" width="80%" style="border-radius: 12px;">
+    <br>
+    <em>Screenshot of the <code>mothers</code> table fields in the MySQL database (shows all columns used for storing mother details related to students)</em>
+</p>
+
+<p align="center">
+    <img src="./assets/images/screenshot-of-guardians-table-fields-in-mysql-db.png" alt="Screenshot of guardians table fields in MySQL database" width="80%" style="border-radius: 12px;">
+    <br>
+    <em>Screenshot of the <code>guardians</code> table fields in the MySQL database (shows all columns used for storing guardian details related to students)</em>
+</p>
+
+<p align="center">
+    <img src="./assets/images/screenshot-of-starkids-database-in-mysql-db.png" alt="Screenshot of starkids database in MySQL" width="80%" style="border-radius: 12px;">
+    <br>
+    <em>Screenshot of the <code>starkids</code> database in MySQL showing all tables used in the application</em>
+</p>
 <br>
 
 ---
