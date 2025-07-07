@@ -3,6 +3,9 @@
 </div>
 <?php
 $subtitle = "Personal Information";
+if (!isset($gender)) {
+    $gender = '';
+}
 include './component/partials/form-subtitle.php';
 ?>
 
