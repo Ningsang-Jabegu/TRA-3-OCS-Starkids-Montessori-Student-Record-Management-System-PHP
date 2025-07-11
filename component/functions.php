@@ -24,4 +24,54 @@ function uploadStudentFile($input_name, $full_name, $roll_no, $label, $target_di
     return null;
 }
 
+function get_student_by_id($studentId) {
+    $host = 'localhost';
+    $user = 'root';
+    $pass = '';
+    $dbname = 'starkids';
+
+    $conn = new mysqli($host, $user, $pass, $dbname);
+
+    if ($conn->connect_error) {
+        return null;
+    }
+
+    $studentId = (int)$studentId;
+
+    // Fetch student
+    $sql = "SELECT * FROM students WHERE id = $studentId";
+    $result = $conn->query($sql);
+
+    if (!$result || $result->num_rows === 0) {
+        $conn->close();
+        return null;
+    }
+
+    $student = $result->fetch_assoc();
+
+    // Fetch father
+    $father_sql = "SELECT * FROM fathers WHERE student_id = $studentId";
+    $father_result = $conn->query($father_sql);
+    $father = $father_result ? $father_result->fetch_assoc() : [];
+
+    // Fetch mother
+    $mother_sql = "SELECT * FROM mothers WHERE student_id = $studentId";
+    $mother_result = $conn->query($mother_sql);
+    $mother = $mother_result ? $mother_result->fetch_assoc() : [];
+
+    // Fetch guardian
+    $guardian_sql = "SELECT * FROM guardians WHERE student_id = $studentId";
+    $guardian_result = $conn->query($guardian_sql);
+    $guardian = $guardian_result ? $guardian_result->fetch_assoc() : [];
+
+    $conn->close();
+
+    return [
+        'student' => $student,
+        'father' => $father ?: [],
+        'mother' => $mother ?: [],
+        'guardian' => $guardian ?: []
+    ];
+}
+
 ?>

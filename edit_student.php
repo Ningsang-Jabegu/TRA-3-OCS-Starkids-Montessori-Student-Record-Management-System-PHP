@@ -133,35 +133,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"]) && empty($errors
     include './layout/page-structure.php'; 
     ?>
 
-    <div class="container">
-        <div class="wrapper mx-auto">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="dashboard-title">Update Student Record</h1>
-                        <p class="mb-4">Please edit the input values and submit to update the student record.</p>
-                        <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
-                            <?php foreach ($fields as $field): ?>
-                                <div class="form-group">
-                                    <label><?php echo ucwords(str_replace("_", " ", $field)); ?></label>
-                                    <input type="text" name="<?php echo $field; ?>"
-                                        class="form-control <?php echo isset($errors[$field]) ? 'is-invalid' : ''; ?>"
-                                        value="<?php echo htmlspecialchars($data[$field] ?? ''); ?>">
-                                    <?php if (isset($errors[$field])): ?>
-                                        <div class="invalid-feedback"><?php echo $errors[$field]; ?></div>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endforeach; ?>
-                            <input type="hidden" name="id"
-                                value="<?php echo htmlspecialchars($_GET['id'] ?? $_POST['id'] ?? ''); ?>">
-                            <input type="submit" class="btn btn-success px-4" value="Update">
-                            <a href="index.php" class="btn btn-secondary ml-2 px-4">Cancel</a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>

@@ -15,7 +15,7 @@
                 }
                 ?>
 
-                <!-- <h2 class="admission-form-title">Student Admission Form - <?php echo get_nepali_year(); ?></h2> -->
+                <h2 class="admission-form-title">Update Student Record</h2>
                 <p>Please edit this form to update the student record in the database.</p>
 
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">

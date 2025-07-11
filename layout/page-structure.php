@@ -19,7 +19,7 @@
                     include 'component/student-status.php';
                     break;
                 case 'edit_student':
-                    include 'pages/edit_student.php';
+                    include 'pages/edit-student.php';
                     break;
                 case 'delete':
                     include 'pages/delete.php';
