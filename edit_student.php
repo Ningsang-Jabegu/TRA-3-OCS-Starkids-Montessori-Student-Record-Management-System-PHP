@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "db/config.php";
 
 $fields = [
     "student_name",
@@ -128,13 +128,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"]) && empty($errors
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.php">
-            <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Starkids Montessori Logo"
-                style="width:180px;height:auto;vertical-align:middle;padding:4px;background: #fff; border-radius: 8px;">
-            <span style="vertical-align:middle;">Starkids Montessori</span>
-        </a>
-    </nav>
+    <?php 
+    $activePage = 'edit_student';
+    include './layout/page-structure.php'; 
+    ?>
 
     <div class="container">
         <div class="wrapper mx-auto">

@@ -150,7 +150,7 @@
     <?php endforeach; ?>
     <div class="form-group d-flex justify-content-between">
         <div class="text-center mt-3">
-            <a href="edit_student?id=<?php echo urlencode($student['id']); ?>" class="btn btn-success px-4">
+            <a href="edit_student.php?id=<?php echo urlencode($student['id']); ?>" class="btn btn-success px-4">
                 Update Record
             </a>
         </div>

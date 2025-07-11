@@ -18,6 +18,12 @@
                 case 'student_status':
                     include 'component/student-status.php';
                     break;
+                case 'edit_student':
+                    include 'pages/edit_student.php';
+                    break;
+                case 'delete':
+                    include 'pages/delete.php';
+                    break;
                 default:
                     include 'component/student-record.php';
                     break;

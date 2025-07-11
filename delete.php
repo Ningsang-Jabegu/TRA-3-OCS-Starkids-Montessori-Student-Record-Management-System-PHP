@@ -47,15 +47,8 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.php">
-            <img src="./assets/images/Star_Kids_Montessori_Preschool_Logo.png" alt="Starkids Montessori Logo"
-                style="width:180px;height:auto;vertical-align:middle;padding:4px;background: #fff; border-radius: 8px;">
-            <span style="vertical-align:middle;">Starkids Montessori</span>
-        </a>
-    </nav>
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="wrapper mx-auto">
             <div class="row">
                 <div class="col-md-12">
@@ -73,7 +66,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    <?php 
+    $activePage = 'delete';
+    include './layout/page-structure.php'; 
+    ?>
 </body>
 
 </html>
