@@ -110,7 +110,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 </head>
 <body>
     <?php
-        $activePage = 'view-students';
+        $activePage = 'view-student';
         include 'layout/page-structure.php';
     ?>
 </body>

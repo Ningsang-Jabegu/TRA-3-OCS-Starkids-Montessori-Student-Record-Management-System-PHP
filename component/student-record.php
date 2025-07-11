@@ -161,10 +161,10 @@
                 <td>${s.dob}</td>
                 <td>${s.contact_number || 'N/A'}</td>
                 <td>
-                    <a href="read.php?id=${s.id}" class="mr-3" title="View Record" data-toggle="tooltip">
+                    <a href="view_student.php?id=${s.id}" class="mr-3" title="View Record" data-toggle="tooltip">
                         <span class="fa fa-eye"></span>
                     </a>
-                    <a href="update.php?id=${s.id}" class="mr-3" title="Update Record" data-toggle="tooltip">
+                    <a href="edit_student?id=${s.id}" class="mr-3" title="Update Record" data-toggle="tooltip">
                         <span class="fa fa-pencil"></span>
                     </a>
                     <a href="delete.php?id=${s.id}" title="Delete Record" data-toggle="tooltip">

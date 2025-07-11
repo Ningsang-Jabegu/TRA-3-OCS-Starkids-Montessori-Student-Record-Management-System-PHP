@@ -8,12 +8,19 @@
     <div class="content-wrapper">
         <main class="main">
             <?php
-            if (isset($activePage) && $activePage === 'admissions') {
-                include 'component/admission-form.php';
-            } elseif (isset($activePage) && $activePage === 'view-students') {
-                include 'pages/view-student.php';
-            } else {
-                include 'component/student-record.php';
+            switch ($activePage ?? '') {
+                case 'admissions':
+                    include 'component/admission-form.php';
+                    break;
+                case 'view-student':
+                    include 'pages/view-student.php';
+                    break;
+                case 'student_status':
+                    include 'component/student-status.php';
+                    break;
+                default:
+                    include 'component/student-record.php';
+                    break;
             }
             ?>
         </main>

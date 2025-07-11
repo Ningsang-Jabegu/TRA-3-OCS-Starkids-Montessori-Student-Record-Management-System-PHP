@@ -14,6 +14,13 @@ $navItems = [
         'icon' => 'fa-user-plus',
         'section' => 'above'
     ],
+    [
+        'name' => 'Student Status',
+        'page' => 'student_status',
+        'href' => 'student_status.php',
+        'icon' => 'fa-info-circle',
+        'section' => 'above'
+    ],
     // [
     //     'name' => 'Students',
     //     'page' => 'students',

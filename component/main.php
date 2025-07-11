@@ -82,8 +82,8 @@ if ($result && mysqli_num_rows($result) > 0) {
         echo "<td>" . htmlspecialchars($row['dob']) . "</td>";
         echo "<td>" . htmlspecialchars($row['contact_number']) . "</td>";
         echo "<td>
-            <a href='read.php?id={$row['id']}' class='mr-3' title='View Record' data-toggle='tooltip'><span class='fa fa-eye'></span></a>
-            <a href='update.php?id={$row['id']}' class='mr-3' title='Update Record' data-toggle='tooltip'><span class='fa fa-pencil'></span></a>
+            <a href='view_student.php?id={$row['id']}' class='mr-3' title='View Record' data-toggle='tooltip'><span class='fa fa-eye'></span></a>
+            <a href='edit_student.php?id={$row['id']}' class='mr-3' title='Update Record' data-toggle='tooltip'><span class='fa fa-pencil'></span></a>
             <a href='delete.php?id={$row['id']}' title='Delete Record' data-toggle='tooltip'><span class='fa fa-trash'></span></a>
         </td>";
         echo "</tr>";
