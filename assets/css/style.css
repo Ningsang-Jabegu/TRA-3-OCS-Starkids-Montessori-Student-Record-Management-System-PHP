@@ -122,6 +122,10 @@ body {
   border-radius: 6px;
 }
 
+/*View Student Record*/
+
+
+
 @media (max-width: 767.98px) {
   .navbar-desktop {
     display: none;
@@ -308,9 +312,18 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: self-start;
+  align-items: flex-start;
   gap: 20px;
   width: 100%;
+}
+
+.view-student-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  width: 100%;
+  padding-top: 30px;
 }
 
 .form-row-last {

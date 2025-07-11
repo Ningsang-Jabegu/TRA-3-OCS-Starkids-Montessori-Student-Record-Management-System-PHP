@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $student_full_name = trim($first_name . ' ' . $last_name);
     }
     
-    $student_image = uploadStudentFile('student_image', $student_full_name, $roll_no, 'Progress Report', $upload_dir_image);;
+    $student_image = uploadStudentFile('student_image', $student_full_name, $roll_no, 'Student Image', $upload_dir_image);;
 
     $permanent_place = trim($_POST["permanent_place"] ?? '');
     $permanent_district = trim($_POST["permanent_district"] ?? '');

@@ -10,6 +10,8 @@
             <?php
             if (isset($activePage) && $activePage === 'admissions') {
                 include 'component/admission-form.php';
+            } elseif (isset($activePage) && $activePage === 'view-students') {
+                include 'pages/view-student.php';
             } else {
                 include 'component/student-record.php';
             }
