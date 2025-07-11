@@ -293,13 +293,6 @@ include './component/partials/form-subtitle.php';
             let capitalizedName = cleanName.replace(/\b\w/g, function (char) {
                 return char.toUpperCase();
             });
-
-            // If you want to capitalize only initials of student's name (assuming student's name is in cleanName)
-            // let studentInitials = cleanName.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-
-            console.log("Image Name: " + capitalizedName);
-            console.log("Extension: " + ext);
         }
-        // console.log("File Extension: " + this.files);
     });
 </script>

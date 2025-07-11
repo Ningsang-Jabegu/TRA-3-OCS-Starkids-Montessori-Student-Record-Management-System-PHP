@@ -6,12 +6,6 @@
                 require_once './component/functions.php';
                 include_once './component/partials/roll-number-generation-logic.php';
 
-                $student_image = '';
-                $student_birth_certificate = '';
-                $student_medical_report = '';
-                $student_progress_report = '';
-                $student_name = '';
-
                 
                 ?>
 

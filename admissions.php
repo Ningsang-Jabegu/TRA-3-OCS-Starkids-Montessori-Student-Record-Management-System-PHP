@@ -34,6 +34,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+
+    // File upload function
+    function uploadStudentFile($input_name, $full_name, $roll_no, $label, $target_dir) {
+        if (!isset($_FILES[$input_name]) || $_FILES[$input_name]['error'] !== UPLOAD_ERR_OK) {
+            return null;
+        }
+
+        $ext = pathinfo($_FILES[$input_name]['name'], PATHINFO_EXTENSION);
+
+        $clean_name = preg_replace('/[^a-zA-Z0-9 ]/', '', $full_name);
+        $file_name = trim($clean_name) . " - $roll_no - $label.$ext";
+        $destination = "{$target_dir}{$file_name}";
+
+        // Ensure upload directory exists
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
+
+        if (move_uploaded_file($_FILES[$input_name]['tmp_name'], $destination)) {
+            return $file_name; // Save this in DB
+        }
+
+        return null;
+    }
+
+    // Set upload directory (ensure this exists and is writable)
+    $upload_dir_birth = __DIR__ . '/web/student_birth_certificates/';
+    $upload_dir_image = __DIR__ . '/web/student_images/';
+    $upload_dir_medical = __DIR__ . '/web/student_medical_reports/';
+    $upload_dir_progress = __DIR__ . '/web/student_progress_reports/';
+
     $first_name = trim($_POST["first_name"] ?? '');
     $middle_name = trim($_POST["middle_name"] ?? '');
     $last_name = trim($_POST["last_name"] ?? '');
@@ -41,10 +72,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $class = trim($_POST["class"] ?? '');
     $gender = trim($_POST["gender"] ?? '');
     $dob = trim($_POST["dob"] ?? '');
-    $contact_number = trim($_POST["contact_number"] ?? '');
+    
     $nationality = trim($_POST["nationality"] ?? '');
     $religion = trim($_POST["religion"] ?? '');
     $blood_group = trim($_POST["blood_group"] ?? '');
+    $contact_number = trim($_POST["contact_number"] ?? '');
+
+    if (!empty($middle_name)) {
+        $student_full_name = trim($first_name . ' ' . $middle_name . ' ' . $last_name);
+    } else {
+        $student_full_name = trim($first_name . ' ' . $last_name);
+    }
+    
+    $student_image = uploadStudentFile('student_image', $student_full_name, $roll_no, 'Progress Report', $upload_dir_image);;
 
     $permanent_place = trim($_POST["permanent_place"] ?? '');
     $permanent_district = trim($_POST["permanent_district"] ?? '');
@@ -52,39 +92,84 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $temporary_place = trim($_POST["temporary_place"] ?? '');
     $temporary_district = trim($_POST["temporary_district"] ?? '');
     $temporary_zone = trim($_POST["temporary_zone"] ?? '');
+    $recommendation_factors = trim($_POST["recommendation_factors"] ?? '');
+    $child_reaction = trim($_POST["child_reaction"] ?? '');
+    $emergency_hospital = trim($_POST["emergency_hospital"] ?? '');
+    $positive_attitude = trim($_POST["positive_attitude"] ?? '');
+    $negative_attitude = trim($_POST["negative_attitude"] ?? '');
+    $interested = trim($_POST["interested"] ?? '');
+    $not_interested = trim($_POST["not_interested"] ?? '');
+    $health_status = trim($_POST["health_status"] ?? '');
 
+
+
+    // Upload files and get their new names
+    $student_progress_report = uploadStudentFile('progress_report', $student_full_name, $roll_no, 'Progress Report', $upload_dir_progress);
+    $student_birth_certificate = uploadStudentFile('birth_certificate', $student_full_name, $roll_no, 'Birth Certificate', $upload_dir_birth);
+    $student_medical_report = uploadStudentFile('medical_report', $student_full_name, $roll_no, 'Medical Report', $upload_dir_medical);
+
+    $declaration_date = trim($_POST["declaration_date"] ?? date("Y-m-d"));
+    $status = "pending";
     $created_at = $_POST['declaration_date'] ?? date("Y-m-d");
     $updated_at = date("Y-m-d H:i:s");
 
     $insert_student_sql = "INSERT INTO students (
-        first_name, middle_name, last_name, roll_no, class, gender, dob, nationality, religion, blood_group,
+        first_name, middle_name, last_name, roll_no, class, 
+        gender, dob, nationality, religion, blood_group,
         contact_number, student_image, permanent_place, permanent_district, permanent_zone,
-        temporary_place, temporary_district, temporary_zone, declaration_date, status, created_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        temporary_place, temporary_district, temporary_zone, recommendation_factors, child_reaction, 
+        emergency_hospital, positive_attitude, negative_attitude, interested, not_interested, 
+        health_status, student_progress_report, student_birth_certificate, student_medical_report ,declaration_date, 
+        status, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?, 
+    ?, ?, ?, ?, ?, 
+    ?, ?, ?, ?, ?, 
+    ?, ?, ?, ?, ?, 
+    ?, ?, ?, ?, ?, 
+    ?, ?, ?, ?, ?, 
+    ?, ?, ?)";
 
     $stmt = mysqli_prepare($link, $insert_student_sql);
     mysqli_stmt_bind_param(
         $stmt,
-        "ssssssssssssssssssss",
+        "sssssssssssssssssssssssssssssssss",
+
         $first_name,
         $middle_name,
         $last_name,
         $roll_no,
         $class,
+
         $gender,
         $dob,
         $nationality,
         $religion,
         $blood_group,
+
         $contact_number,
         $student_image,
         $permanent_place,
         $permanent_district,
         $permanent_zone,
+
         $temporary_place,
         $temporary_district,
         $temporary_zone,
-        $created_at,
+        $recommendation_factors,
+        $child_reaction,
+
+        $emergency_hospital,
+        $positive_attitude,
+        $negative_attitude,
+        $interested,
+        $not_interested,
+
+        $health_status,
+        $student_progress_report,
+        $student_birth_certificate,
+        $student_medical_report,
+        $declaration_date,
+
         $status,
         $created_at,
         $updated_at
@@ -104,25 +189,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $father_mobile1 = trim($_POST['father_mobile1'] ?? '');
         $father_mobile2 = trim($_POST['father_mobile2'] ?? '');
         $father_email = trim($_POST['father_email'] ?? '');
-        $father_facebook = trim($_POST['father_facebook'] ?? '');
+        $father_facebook = trim($_POST['father_facebook_id'] ?? '');
+        $father_signature = trim($_POST["father_signature"] ?? '');
 
-        $insert_father_sql = "INSERT INTO fathers (student_id, first_name, middle_name, last_name, occupation, office_name, office_number, residence, mobile_1, mobile_2, email, facebook_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $insert_father_sql = "INSERT INTO fathers (student_id, first_name, middle_name, last_name, occupation, office_name, office_number, residence, mobile_1, mobile_2, email, facebook_id, father_signature) 
+        VALUES (?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?)";
         $stmt_father = mysqli_prepare($link, $insert_father_sql);
         mysqli_stmt_bind_param(
             $stmt_father,
-            "isssssssssss",
+            "issssssssssss",
             $student_id,
             $father_first_name,
             $father_middle_name,
             $father_last_name,
             $father_occupation,
+
             $father_office,
             $father_office_contact,
             $father_residence,
             $father_mobile1,
             $father_mobile2,
+
             $father_email,
-            $father_facebook
+            $father_facebook,
+            $father_signature
         );
         mysqli_stmt_execute($stmt_father);
 
@@ -137,25 +229,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mother_mobile1 = trim($_POST['mother_mobile1'] ?? '');
         $mother_mobile2 = trim($_POST['mother_mobile2'] ?? '');
         $mother_email = trim($_POST['mother_email'] ?? '');
-        $mother_facebook = trim($_POST['mother_facebook'] ?? '');
+        $mother_facebook = trim($_POST['mother_facebook_id'] ?? '');
+        $mother_signature = trim($_POST["mother_signature"] ?? '');
 
-        $insert_mother_sql = "INSERT INTO mothers (student_id, first_name, middle_name, last_name, occupation, office_name, office_number, residence, mobile_1, mobile_2, email, facebook_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $insert_mother_sql = "INSERT INTO mothers (student_id, first_name, middle_name, last_name, occupation, office_name, office_number, residence, mobile_1, mobile_2, email, facebook_id, mother_signature) 
+        VALUES (?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?)";
         $stmt_mother = mysqli_prepare($link, $insert_mother_sql);
         mysqli_stmt_bind_param(
             $stmt_mother,
-            "isssssssssss",
+            "issssssssssss",
             $student_id,
             $mother_first_name,
             $mother_middle_name,
             $mother_last_name,
             $mother_occupation,
+
             $mother_office,
             $mother_office_contact,
             $mother_residence,
             $mother_mobile1,
             $mother_mobile2,
+
             $mother_email,
-            $mother_facebook
+            $mother_facebook,
+            $mother_signature
         );
         mysqli_stmt_execute($stmt_mother);
 
@@ -186,11 +285,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $guardian_mobile1,
             $guardian_mobile2,
             $guardian_email,
-            $guardian_facebook
+            $guardian_facebook,
         );
         mysqli_stmt_execute($stmt_guardian);
 
-        echo json_encode(['status' => 'success', 'message' => 'Student added successfully.', 'redirect' => 'index.php']);
+        header("Location: index.php");
         exit;
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Failed to insert student.']);
